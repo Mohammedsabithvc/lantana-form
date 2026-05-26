@@ -11,13 +11,37 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--dark:#1C1A16;--cream:#F9F6F0;--gold:#B08D57;--gold-light:#D4B483;--muted:#6B6560;--border:#E0D9CE;--white:#fff;--red:#C0392B}
-html{background:#F9F6F0;}
-:root{color-scheme:light only}
-@media(prefers-color-scheme:dark){
-  html,body{background:#F9F6F0!important;color:#1C1A16!important}
-  .verify-card,.menu-card,.cart-item,.cat-nav button{background:#fff!important}
-  input,select,textarea{background:#F9F6F0!important;color:#1C1A16!important}
+
+html, body {
+  background: var(--cream) !important;
+  color: var(--dark) !important;
+  color-scheme: light;
+}
+
+/* Force dark-mode engines on mobile to keep the light theme integrity */
+@media (prefers-color-scheme: dark) {
+  html, body, #mainApp, .page-body, .hero, .booking-banner, .menu-area, .sidebar, .cart-drawer {
+    background: var(--cream) !important;
+    color: var(--dark) !important;
+  }
+  .verify-card, .menu-card, .cart-item, .cat-nav button {
+    background: var(--white) !important;
+    color: var(--dark) !important;
+    border-color: var(--border) !important;
+  }
+  .item-name, .hero h1, .verify-card h2, .sidebar-title, .menu-section h2 {
+    color: var(--dark) !important;
+  }
+  .item-desc, .hero p, .verify-card > p, .detail, .verify-note, .allergen-note, .cart-empty {
+    color: var(--muted) !important;
+  }
+  input, select, textarea {
+    background: var(--cream) !important;
+    color: var(--dark) !important;
+    border-color: var(--border) !important;
+  }
 }  
+
 body{background:var(--cream);font-family:'DM Sans',sans-serif;color:var(--dark);min-height:100vh}
 
 .site-header{background:var(--dark);padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
