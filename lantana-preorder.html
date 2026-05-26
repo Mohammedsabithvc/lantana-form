@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#F9F6F0">
 <meta name="supported-color-schemes" content="light">  
 <title>Lantana London Bridge — Pre-Order</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&v=102" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
@@ -22,30 +22,14 @@
   --red: #C0392B;
 }
 
-/* TRICK: We use identical start/end gradient colors. 
-  This looks flat to the user, but fools the iOS WebKit engine into treating 
-  the background as an uninvertible image element.
-*/
+/* The ultimate WebKit override: Linear gradients with identical color stops.
+   This looks completely flat on screen but forces iOS Safari/Chrome to treat 
+   the background as an un-invertible background image surface. */
 html, body, #mainApp, .page-body, .menu-area, .sidebar, .cart-drawer, .verify-screen {
   background-image: linear-gradient(180deg, #F9F6F0 0%, #F9F6F0 100%) !important;
   background-color: #F9F6F0 !important;
   color: #1C1A16 !important;
   color-scheme: light only !important;
-}
-
-/* Apply gradient trick to structural cards to prevent automatic inversion */
-.verify-card, .menu-card, .cart-item, .cat-nav button, textarea {
-  background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 100%) !important;
-  background-color: #ffffff !important;
-  color: #1C1A16 !important;
-  border: 1px solid #E0D9CE !important;
-}
-
-input, select {
-  background-image: linear-gradient(180deg, #F9F6F0 0%, #F9F6F0 100%) !important;
-  background-color: #F9F6F0 !important;
-  color: #1C1A16 !important;
-  border: 1px solid #E0D9CE !important;
 }
 
 body {
@@ -99,12 +83,23 @@ body {
   padding: 0 4px;
 }
 
+/* VERIFY SCREEN COMPONENTS */
 .verify-screen {
   min-height: calc(100vh - 60px);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+}
+.verify-card {
+  background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 100%) !important;
+  background-color: #ffffff !important;
+  border: 1px solid #E0D9CE !important;
+  border-radius: 12px;
+  padding: 3rem;
+  width: 100%;
+  max-width: 440px;
+  text-align: center;
 }
 .lock-icon {
   width: 52px;
@@ -147,7 +142,20 @@ body {
   display: block;
   margin-bottom: .4rem;
 }
-.verify-field input:focus { border-color: #B08D57 !important; background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 100%) !important; }
+.verify-field input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #E0D9CE !important;
+  border-radius: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: #1C1A16 !important;
+  outline: none;
+  background-image: linear-gradient(180deg, #F9F6F0 0%, #F9F6F0 100%) !important;
+  background-color: #F9F6F0 !important;
+  transition: border-color .2s;
+}
+.verify-field input:focus { border-color: #B08D57 !important; background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 100%) !important; background-color: #ffffff !important; }
 .err { font-size: 12px; color: #C0392B !important; margin-top: .4rem; display: none; }
 .err.show { display: block; }
 .verify-btn {
@@ -212,6 +220,10 @@ body {
 .cat-nav { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 2rem; }
 .cat-nav button {
   padding: 6px 14px;
+  background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 100%) !important;
+  background-color: #ffffff !important;
+  border: 1px solid #E0D9CE !important;
+  border-radius: 100px;
   font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   color: #6B6560 !important;
@@ -236,6 +248,18 @@ body {
 .menu-section h2::before { content: ''; display: block; width: 3px; height: 1.2em; background: #B08D57 !important; border-radius: 2px; }
 .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 
+/* PRODUCT CARD STYLING */
+.menu-card {
+  background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 100%) !important;
+  background-color: #ffffff !important;
+  border: 1px solid #E0D9CE !important;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .2s, box-shadow .2s;
+  position: relative;
+}
 .menu-card:hover { border-color: #D4B483 !important; box-shadow: 0 4px 16px rgba(0,0,0,.05); }
 .menu-card.in-cart { border-color: #B08D57 !important; box-shadow: 0 0 0 1px #B08D57 !important; }
 
@@ -291,6 +315,9 @@ body {
   width: 28px;
   height: 28px;
   border-radius: 50%;
+  border: 1px solid #E0D9CE !important;
+  background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 100%) !important;
+  background-color: #ffffff !important;
   font-size: 16px;
   cursor: pointer;
   display: flex;
@@ -307,18 +334,22 @@ body {
 .qty-input-wrap { position: relative; display: flex; align-items: center; }
 .qty-num-display { font-size: 13px; font-weight: 600; min-width: 22px; text-align: center; cursor: pointer; padding: 2px 4px; border-radius: 3px; transition: background .15s; color: #1C1A16 !important; }
 .qty-num-display:hover { background: #F9F6F0 !important; }
-.qty-inline-input { font-size: 13px; font-weight: 600; width: 40px; text-align: center; border: 1px solid #B08D57 !important; border-radius: 4px; padding: 2px 4px; font-family: 'DM Sans', sans-serif; outline: none; display: none; color: #1C1A16 !important; }
+.qty-inline-input { font-size: 13px; font-weight: 600; width: 40px; text-align: center; border: 1px solid #B08D57 !important; border-radius: 4px; padding: 2px 4px; font-family: 'DM Sans', sans-serif; outline: none; display: none; background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 100%) !important; background-color: #ffffff !important; color: #1C1A16 !important; }
 
 /* SIDEBAR BASKET SCREEN */
 .sidebar-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 1.5rem; padding-bottom: .8rem; border-bottom: 1px solid #E0D9CE !important; color: #1C1A16 !important; }
 .cart-empty { text-align: center; padding: 2rem 0; color: #6B6560 !important; font-size: 13px; }
 .cart-items { display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1.5rem; }
+.cart-item { display: flex; align-items: center; gap: .6rem; padding: .65rem .75rem; background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 100%) !important; background-color: #ffffff !important; border: 1px solid #E0D9CE !important; border-radius: 6px; }
 .ci-name { font-size: 12px; font-weight: 500; flex: 1; line-height: 1.3; color: #1C1A16 !important; }
 .ci-qty-ctrl { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
 .ci-qty-btn {
   width: 20px;
   height: 20px;
   border-radius: 50%;
+  border: 1px solid #E0D9CE !important;
+  background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 100%) !important;
+  background-color: #ffffff !important;
   font-size: 13px;
   cursor: pointer;
   display: flex;
@@ -330,7 +361,7 @@ body {
 }
 .ci-qty-btn:hover { border-color: #B08D57 !important; }
 .ci-qty-num { font-size: 12px; font-weight: 600; min-width: 18px; text-align: center; cursor: pointer; color: #1C1A16 !important; }
-.ci-qty-inline { font-size: 12px; font-weight: 600; width: 34px; text-align: center; border: 1px solid #B08D57 !important; border-radius: 3px; padding: 1px 3px; font-family: 'DM Sans', sans-serif; outline: none; display: none; color: #1C1A16 !important; }
+.ci-qty-inline { font-size: 12px; font-weight: 600; width: 34px; text-align: center; border: 1px solid #B08D57 !important; border-radius: 3px; padding: 1px 3px; font-family: 'DM Sans', sans-serif; outline: none; display: none; background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 100%) !important; background-color: #ffffff !important; color: #1C1A16 !important; }
 .ci-price { font-size: 12px; font-weight: 500; white-space: nowrap; min-width: 44px; text-align: right; color: #1C1A16 !important; }
 .ci-remove { background: none; border: none; color: #ccc; cursor: pointer; font-size: 16px; padding: 0 2px; line-height: 1; transition: color .2s; }
 .ci-remove:hover { color: #C0392B !important; }
@@ -338,13 +369,14 @@ body {
 .cart-row { display: flex; justify-content: space-between; font-size: 13px; color: #1C1A16 !important; margin-bottom: .5rem; }
 .cart-row.total { font-weight: 500; font-size: 14px; border-top: 1px solid #E0D9CE !important; padding-top: .75rem; margin-top: .5rem; }
 .cart-note label { font-size: 11px; color: #6B6560 !important; letter-spacing: .06em; text-transform: uppercase; display: block; margin-bottom: .4rem; }
+.cart-note textarea { width: 100%; padding: 10px 12px; border: 1px solid #E0D9CE !important; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-size: 13px; resize: none; height: 70px; background-image: linear-gradient(180deg, #ffffff 0%, #ffffff 100%) !important; background-color: #ffffff !important; color: #1C1A16 !important; outline: none; margin-bottom: 1rem; }
 .cart-note textarea:focus { border-color: #B08D57 !important; }
 .submit-btn { width: 100%; padding: 13px; background: #1C1A16 !important; color: #ffffff !important; border: none; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: background .2s; }
 .submit-btn:hover { background: #2C2924 !important; }
 .submit-btn:disabled { background: #6B6560 !important; cursor: not-allowed; }
 .allergen-note { font-size: 11px; color: #6B6560 !important; line-height: 1.6; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #E0D9CE !important; }
 
-/* SUCCESS FLOW MODAL */
+/* SUCCESS SCREEN */
 .success-screen { display: none; text-align: center; padding: 4rem 2rem; grid-column: 1/-1; }
 .check { width: 56px; height: 56px; border: 1px solid #B08D57 !important; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; }
 .success-screen h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; margin-bottom: 1rem; color: #1C1A16 !important; }
