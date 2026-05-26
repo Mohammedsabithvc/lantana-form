@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,35 +12,42 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--dark:#1C1A16;--cream:#F9F6F0;--gold:#B08D57;--gold-light:#D4B483;--muted:#6B6560;--border:#E0D9CE;--white:#fff;--red:#C0392B}
 
-html, body {
-  background: var(--cream) !important;
-  color: var(--dark) !important;
-  color-scheme: light;
+/* Force light backgrounds & dark text everywhere under all system conditions */
+html, body, #mainApp, .page-body, .hero, .booking-banner, .menu-area, .sidebar, .cart-drawer {
+  background: #F9F6F0 !important;
+  color: #1C1A16 !important;
+  color-scheme: light !important;
 }
 
-/* Force dark-mode engines on mobile to keep the light theme integrity */
+/* Prevent text dimming or transparency loss on headers and descriptions */
+.item-name, .hero h1, .verify-card h2, .sidebar-title, .menu-section h2 {
+  color: #1C1A16 !important;
+}
+.item-desc, .hero p, .verify-card > p, .detail, .verify-note, .allergen-note, .cart-empty {
+  color: #6B6560 !important;
+}
+
+/* Hard reset component containers */
+.verify-card, .menu-card, .cart-item, .cat-nav button {
+  background: #ffffff !important;
+  color: #1C1A16 !important;
+  border-color: #E0D9CE !important;
+}
+input, select, textarea {
+  background: #F9F6F0 !important;
+  color: #1C1A16 !important;
+  border-color: #E0D9CE !important;
+}
+
+/* Re-target dark engines explicitly to back off theme changes */
 @media (prefers-color-scheme: dark) {
   html, body, #mainApp, .page-body, .hero, .booking-banner, .menu-area, .sidebar, .cart-drawer {
-    background: var(--cream) !important;
-    color: var(--dark) !important;
+    background: #F9F6F0 !important;
+    color: #1C1A16 !important;
   }
-  .verify-card, .menu-card, .cart-item, .cat-nav button {
-    background: var(--white) !important;
-    color: var(--dark) !important;
-    border-color: var(--border) !important;
-  }
-  .item-name, .hero h1, .verify-card h2, .sidebar-title, .menu-section h2 {
-    color: var(--dark) !important;
-  }
-  .item-desc, .hero p, .verify-card > p, .detail, .verify-note, .allergen-note, .cart-empty {
-    color: var(--muted) !important;
-  }
-  input, select, textarea {
-    background: var(--cream) !important;
-    color: var(--dark) !important;
-    border-color: var(--border) !important;
-  }
-}  
+  .item-name, .hero h1, .verify-card h2, .sidebar-title, .menu-section h2 { color: #1C1A16 !important; }
+  .item-desc, .hero p, .verify-card > p, .detail { color: #6B6560 !important; }
+}
 
 body{background:var(--cream);font-family:'DM Sans',sans-serif;color:var(--dark);min-height:100vh}
 
@@ -254,6 +261,9 @@ body{background:var(--cream);font-family:'DM Sans',sans-serif;color:var(--dark);
 </div>
 
 <script>
+// Prevent mobile force dark engines programmatically
+document.documentElement.setAttribute('data-theme', 'light');
+
 const SUPABASE_URL = 'https://prtnpcmjklpbgfytuths.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBydG5wY21qa2xwYmdmeXR1dGhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4NDUwMzEsImV4cCI6MjA5NDQyMTAzMX0.e6gJfly1paBBOpEl6i2UIJ5CVE25SW_IMqmUNMHwhKw';
 
