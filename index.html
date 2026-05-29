@@ -526,10 +526,18 @@
               </div>
             </label>
             <label class="booking-type-card">
+              <input type="radio" name="booking_type" value="group_dining_small">
+              <div class="card-inner">
+                <div class="card-tag">Group dining</div>
+                <div class="card-title">Group Table (Under 8)</div>
+                <div class="card-desc">1 to 8 guests · Standard dining area · No minimum spend</div>
+              </div>
+            </label>
+            <label class="booking-type-card">
               <input type="radio" name="booking_type" value="group_dining">
               <div class="card-inner">
                 <div class="card-tag">Group dining</div>
-                <div class="card-title">Group Table</div>
+                <div class="card-title">Group Table (9+)</div>
                 <div class="card-desc">9 or more guests · Shared dining area · No minimum spend</div>
               </div>
             </label>
@@ -557,7 +565,9 @@
             </div>
             <div class="field" id="field-time">
               <label>Preferred time <span class="req">*</span></label>
-              <input type="time" name="time">
+              <select name="time">
+                <option value="" disabled selected>Select a time</option>
+              </select>
               <span class="error-msg">Please select a time</span>
             </div>
           </div>
@@ -620,9 +630,60 @@
 <script>
   const form = document.getElementById('enquiry-form');
   const submitBtn = document.getElementById('submit-btn');
+  const dateInput = form.querySelector('input[name="date"]');
+  const timeSelect = form.querySelector('select[name="time"]');
 
-  const today = new Date().toISOString().split('T')[0];
-  document.querySelector('input[name="date"]').min = today;
+  // Set minimum date to today
+  const todayDate = new Date();
+  const todayString = todayDate.toISOString().split('T')[0];
+  dateInput.min = todayString;
+
+  // Generate 30-minute intervals from 07:00 to 23:00 to match venue trading hours
+  function populateTimeSlots() {
+    const selectedDate = dateInput.value;
+    const now = new Date();
+    
+    // Save current selection to restore it if it's still valid
+    const currentSelection = timeSelect.value;
+    
+    timeSelect.innerHTML = '<option value="" disabled selected>Select a time</option>';
+
+    const startHour = 7; 
+    const endHour = 23;
+
+    for (let hour = startHour; hour <= endHour; hour++) {
+      ['00', '30'].forEach(minutes => {
+        if (hour === endHour && minutes === '30') return; // Closes at 23:00
+        
+        const timeString = `${hour.toString().padStart(2, '0')}:${minutes}`;
+        
+        // If the chosen date is today, omit past times
+        if (selectedDate === todayString) {
+          const currentHour = now.getHours();
+          const currentMinute = now.getMinutes();
+          if (hour < currentHour || (hour === currentHour && parseInt(minutes) <= currentMinute)) {
+            return; 
+          }
+        }
+
+        const option = document.createElement('option');
+        option.value = timeString;
+        option.textContent = timeString;
+        timeSelect.appendChild(option);
+      });
+    }
+
+    // Restore previous selection if it's still an available choice
+    if (currentSelection && [...timeSelect.options].some(o => o.value === currentSelection)) {
+      timeSelect.value = currentSelection;
+    }
+  }
+
+  // Handle dynamic time rebuilding when changing dates
+  dateInput.addEventListener('change', populateTimeSlots);
+  
+  // Initial run on document load
+  document.addEventListener('DOMContentLoaded', populateTimeSlots);
 
   const bookingTypeRadios = document.querySelectorAll('input[name="booking_type"]');
   const eventDetailsSection = document.getElementById('event-details-section');
@@ -632,9 +693,9 @@
       document.getElementById('field-booking-type-error').style.display = 'none';
       if (radio.value === 'general') {
         eventDetailsSection.style.opacity = '0.5';
-        document.querySelector('input[name="date"]').removeAttribute('required');
-        document.querySelector('input[name="time"]').removeAttribute('required');
-        document.querySelector('input[name="guests"]').removeAttribute('required');
+        dateInput.removeAttribute('required');
+        timeSelect.removeAttribute('required');
+        form.querySelector('input[name="guests"]').removeAttribute('required');
       } else {
         eventDetailsSection.style.opacity = '1';
       }
@@ -656,14 +717,22 @@
     return true;
   }
 
+  // Added dynamic 'change' event to time custom select element for responsive inline validations
   ['name', 'phone', 'email', 'date', 'time', 'guests'].forEach(name => {
     const input = form.querySelector(`[name="${name}"]`);
     if (input) {
-      input.addEventListener('blur', () => validateField(`field-${name}`, input));
+      const eventType = input.tagName === 'SELECT' ? 'change' : 'blur';
+      input.addEventListener(eventType, () => validateField(`field-${name}`, input));
       input.addEventListener('input', () => {
         const field = document.getElementById(`field-${name}`);
         if (field) field.classList.remove('has-error');
       });
+      if (input.tagName === 'SELECT') {
+        input.addEventListener('change', () => {
+          const field = document.getElementById(`field-${name}`);
+          if (field) field.classList.remove('has-error');
+        });
+      }
     }
   });
 
@@ -683,8 +752,8 @@
     }
 
     if (selectedType && selectedType.value !== 'general') {
-      valid = validateField('field-date', form.querySelector('[name="date"]')) && valid;
-      valid = validateField('field-time', form.querySelector('[name="time"]')) && valid;
+      valid = validateField('field-date', dateInput) && valid;
+      valid = validateField('field-time', timeSelect) && valid;
       valid = validateField('field-guests', form.querySelector('[name="guests"]')) && valid;
     }
 
@@ -695,8 +764,8 @@
       email: form.querySelector('[name="email"]').value.trim(),
       phone: form.querySelector('[name="phone"]').value.trim(),
       booking_type: selectedType.value,
-      date: form.querySelector('[name="date"]').value,
-      time: form.querySelector('[name="time"]').value,
+      date: dateInput.value,
+      time: timeSelect.value,
       guests: form.querySelector('[name="guests"]').value,
       occasion: form.querySelector('[name="occasion"]').value,
       dietary: form.querySelector('[name="dietary"]').value.trim(),
