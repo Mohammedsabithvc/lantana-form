@@ -20,395 +20,102 @@
     --success: #2E7D52;
   }
 
-  body {
-    background: var(--cream);
-    font-family: 'DM Sans', sans-serif;
-    color: var(--dark);
-    min-height: 100vh;
-  }
+  body { background: var(--cream); font-family: 'DM Sans', sans-serif; color: var(--dark); min-height: 100vh; }
 
-  .page {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 100vh;
-  }
+  .page { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
 
-  .left-panel {
-    background: var(--dark);
-    padding: 4rem 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-  }
+  .left-panel { background: var(--dark); padding: 4rem 3rem; display: flex; flex-direction: column; justify-content: space-between; position: sticky; top: 0; height: 100vh; }
+  .left-panel .logo { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); }
+  .left-panel .headline { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 300; line-height: 1.15; color: var(--white); }
+  .left-panel .headline em { font-style: italic; color: var(--gold-light); }
 
-  .left-panel .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-  }
+  .venue-details { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; }
+  .venue-detail { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
+  .venue-detail .icon { width: 32px; height: 32px; border: 1px solid rgba(176,141,87,0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .venue-detail .icon svg { width: 14px; height: 14px; stroke: var(--gold); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .venue-detail .label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+  .venue-detail .value { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5; }
 
-  .left-panel .headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3.2rem;
-    font-weight: 300;
-    line-height: 1.15;
-    color: var(--white);
-  }
+  .right-panel { padding: 4rem 3rem; overflow-y: auto; }
 
-  .left-panel .headline em {
-    font-style: italic;
-    color: var(--gold-light);
-  }
+  .form-header { margin-bottom: 2.5rem; }
+  .form-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; color: var(--dark); margin-bottom: 0.5rem; }
+  .form-header p { font-size: 14px; color: var(--muted); line-height: 1.6; }
 
-  .venue-details {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 2rem;
-  }
+  .form-section { margin-bottom: 2.5rem; }
+  .section-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); }
 
-  .venue-detail {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .field-row.full { grid-template-columns: 1fr; }
 
-  .venue-detail .icon {
-    width: 32px;
-    height: 32px;
-    border: 1px solid rgba(176,141,87,0.4);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.04em; }
+  .field label .req { color: var(--gold); margin-left: 2px; }
 
-  .venue-detail .icon svg {
-    width: 14px;
-    height: 14px;
-    stroke: var(--gold);
-    fill: none;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 11px 14px; border: 1px solid var(--border); border-radius: 4px;
+    background: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--dark);
+    outline: none; transition: border-color 0.2s; appearance: none; -webkit-appearance: none;
   }
-
-  .venue-detail .label {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 3px;
-  }
-
-  .venue-detail .value {
-    font-size: 14px;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.5;
-  }
-
-  .right-panel {
-    padding: 4rem 3rem;
-    overflow-y: auto;
-  }
-
-  .form-header {
-    margin-bottom: 2.5rem;
-  }
-
-  .form-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 400;
-    color: var(--dark);
-    margin-bottom: 0.5rem;
-  }
-
-  .form-header p {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-
-  .form-section {
-    margin-bottom: 2.5rem;
-  }
-
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.2rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .field-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .field-row.full {
-    grid-template-columns: 1fr;
-  }
-
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .field label {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--muted);
-    letter-spacing: 0.04em;
-  }
-
-  .field label .req {
-    color: var(--gold);
-    margin-left: 2px;
-  }
-
-  .field input,
-  .field select,
-  .field textarea {
-    width: 100%;
-    padding: 11px 14px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    background: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--dark);
-    outline: none;
-    transition: border-color 0.2s;
-    appearance: none;
-    -webkit-appearance: none;
-  }
-
-  .field input:focus,
-  .field select:focus,
-  .field textarea:focus {
-    border-color: var(--gold);
-  }
-
-  .field textarea {
-    resize: vertical;
-    min-height: 90px;
-    line-height: 1.5;
-  }
-
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--gold); }
+  .field textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
   .field select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6560' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 36px;
+    background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
   }
 
-  .booking-type-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
+  .booking-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+  .booking-type-card { position: relative; cursor: pointer; }
+  .booking-type-card input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .booking-type-card .card-inner { border: 1px solid var(--border); border-radius: 4px; padding: 1rem; background: var(--white); transition: all 0.2s; height: 100%; }
+  .booking-type-card input[type="radio"]:checked + .card-inner { border-color: var(--gold); background: #FDFAF5; }
+  .booking-type-card .card-title { font-size: 13px; font-weight: 500; color: var(--dark); margin-bottom: 4px; }
+  .booking-type-card .card-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .booking-type-card .card-tag { display: inline-block; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(176,141,87,0.3); border-radius: 2px; padding: 2px 6px; margin-bottom: 6px; }
 
-  .booking-type-card {
-    position: relative;
-    cursor: pointer;
-  }
+  /* End time row — hidden by default, shown for private hire */
+  #end-time-row { display: none; }
+  #end-time-row.visible { display: grid; }
 
-  .booking-type-card input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  .booking-type-card .card-inner {
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1rem;
-    background: var(--white);
-    transition: all 0.2s;
-    height: 100%;
-  }
-
-  .booking-type-card input[type="radio"]:checked + .card-inner {
-    border-color: var(--gold);
-    background: #FDFAF5;
-  }
-
-  .booking-type-card .card-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--dark);
-    margin-bottom: 4px;
-  }
-
-  .booking-type-card .card-desc {
-    font-size: 11px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
-  .booking-type-card .card-tag {
-    display: inline-block;
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid rgba(176,141,87,0.3);
-    border-radius: 2px;
-    padding: 2px 6px;
-    margin-bottom: 6px;
-  }
-
-  .occasion-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .occasion-chip {
-    position: relative;
-    cursor: pointer;
-  }
-
-  .occasion-chip input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  .occasion-chip .chip-label {
-    display: inline-block;
-    padding: 7px 14px;
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    font-size: 13px;
-    color: var(--muted);
-    background: var(--white);
-    transition: all 0.2s;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-
-  .occasion-chip input[type="radio"]:checked + .chip-label {
-    border-color: var(--gold);
-    color: var(--dark);
-    background: #FDFAF5;
-  }
-
-  .submit-area {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .submit-btn {
-    width: 100%;
-    padding: 14px;
-    background: var(--dark);
-    color: var(--white);
-    border: none;
-    border-radius: 4px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .submit-btn:hover {
-    background: #2C2924;
-  }
-
-  .submit-btn:disabled {
-    background: var(--muted);
-    cursor: not-allowed;
-  }
-
-  .privacy-note {
-    font-size: 12px;
-    color: var(--muted);
-    text-align: center;
-    margin-top: 1rem;
-    line-height: 1.5;
-  }
-
-  .success-screen {
+  /* Duration indicator */
+  #duration-indicator {
     display: none;
-    text-align: center;
-    padding: 4rem 2rem;
-  }
-
-  .success-screen .success-icon {
-    width: 56px;
-    height: 56px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 2rem;
-  }
-
-  .success-screen .success-icon svg {
-    width: 24px;
-    height: 24px;
-    stroke: var(--gold);
-    fill: none;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .success-screen h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 400;
-    margin-bottom: 1rem;
-  }
-
-  .success-screen p {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.7;
-    max-width: 380px;
-    margin: 0 auto;
-  }
-
-  .error-msg {
     font-size: 12px;
-    color: var(--error);
+    padding: 8px 12px;
+    border-radius: 4px;
     margin-top: 4px;
+  }
+  #duration-indicator.valid { display: block; background: rgba(46,125,82,0.08); color: var(--success); border: 1px solid rgba(46,125,82,0.2); }
+  #duration-indicator.invalid { display: block; background: rgba(192,57,43,0.08); color: var(--error); border: 1px solid rgba(192,57,43,0.2); }
+
+  .private-hire-note {
     display: none;
+    font-size: 12px;
+    color: var(--gold);
+    background: rgba(176,141,87,0.06);
+    border: 1px solid rgba(176,141,87,0.2);
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin-bottom: 1rem;
+    line-height: 1.5;
   }
+  .private-hire-note.visible { display: block; }
 
-  .field.has-error input,
-  .field.has-error select,
-  .field.has-error textarea {
-    border-color: var(--error);
-  }
+  .submit-area { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .submit-btn { width: 100%; padding: 14px; background: var(--dark); color: var(--white); border: none; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+  .submit-btn:hover { background: #2C2924; }
+  .submit-btn:disabled { background: var(--muted); cursor: not-allowed; }
+  .privacy-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 1rem; line-height: 1.5; }
 
-  .field.has-error .error-msg {
-    display: block;
-  }
+  .success-screen { display: none; text-align: center; padding: 4rem 2rem; }
+  .success-screen .success-icon { width: 56px; height: 56px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; }
+  .success-screen .success-icon svg { width: 24px; height: 24px; stroke: var(--gold); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .success-screen h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; margin-bottom: 1rem; }
+  .success-screen p { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 380px; margin: 0 auto; }
+
+  .error-msg { font-size: 12px; color: var(--error); margin-top: 4px; display: none; }
+  .field.has-error input, .field.has-error select, .field.has-error textarea { border-color: var(--error); }
+  .field.has-error .error-msg { display: block; }
 
   @media (max-width: 768px) {
     .page { grid-template-columns: 1fr; }
@@ -425,47 +132,34 @@
 <div class="page">
   <div class="left-panel">
     <div class="logo">Lantana London Bridge</div>
-
     <div>
       <h1 class="headline">Reserve your<br><em>perfect</em><br>occasion.</h1>
       <p style="font-size:13px; color:rgba(255,255,255,0.5); margin-top:1.2rem; line-height:1.7;">Two floors designed to flex from breakfast meetings and networking events to milestone birthdays and full venue takeovers. Cocktails upstairs. Dinner downstairs. Or make the whole place yours.</p>
     </div>
-
     <div class="venue-details">
       <div class="venue-detail">
-        <div class="icon">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
         <div>
           <div class="label">Location</div>
           <div class="value">44–46 Southwark Street<br>Moments from Borough Market &amp; London Bridge Station</div>
         </div>
       </div>
-
       <div class="venue-detail">
-        <div class="icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        </div>
+        <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
         <div>
           <div class="label">Basement Space</div>
-          <div class="value">45 seated · 60 standing<br>Mon–Fri all day from 7am · Sat–Sun from 5pm<br>£1,500 minimum spend</div>
+          <div class="value">45 seated · 60 standing<br>Mon–Fri all day from 7am · Sat–Sun from 5pm</div>
         </div>
       </div>
-
       <div class="venue-detail">
-        <div class="icon">
-          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
         <div>
           <div class="label">Exclusive Hire — Two Floors</div>
-          <div class="value">80 seated · 120 standing<br>Mon–Sun from 5pm to 12am<br>£3,500 minimum spend</div>
+          <div class="value">80 seated · 120 standing<br>Mon–Sun from 5pm to 12am</div>
         </div>
       </div>
-
       <div class="venue-detail">
-        <div class="icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
+        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <div>
           <div class="label">Perfect for</div>
           <div class="value">Company celebrations · Large group dining<br>Product launches · Networking · Birthdays</div>
@@ -514,7 +208,7 @@
               <div class="card-inner">
                 <div class="card-tag">Private hire</div>
                 <div class="card-title">Basement Space</div>
-                <div class="card-desc">45 seated · 60 standing · Mon–Fri from £1,500 · Sat–Sun from 5pm £1,500</div>
+                <div class="card-desc">45 seated · 60 standing · Minimum 3 hours</div>
               </div>
             </label>
             <label class="booking-type-card">
@@ -522,23 +216,15 @@
               <div class="card-inner">
                 <div class="card-tag">Exclusive hire</div>
                 <div class="card-title">Full Venue — Two Floors</div>
-                <div class="card-desc">80 seated · 120 standing · Mon–Sun from 5pm · £3,500 min spend</div>
+                <div class="card-desc">80 seated · 120 standing · Minimum 3 hours</div>
               </div>
             </label>
             <label class="booking-type-card">
-              <input type="radio" name="booking_type" value="group_dining_small">
+              <input type="radio" name="booking_type" value="table_reservation">
               <div class="card-inner">
-                <div class="card-tag">Group dining</div>
-                <div class="card-title">Group Table (Under 8)</div>
-                <div class="card-desc">1 to 8 guests · Standard dining area · No minimum spend</div>
-              </div>
-            </label>
-            <label class="booking-type-card">
-              <input type="radio" name="booking_type" value="group_dining">
-              <div class="card-inner">
-                <div class="card-tag">Group dining</div>
-                <div class="card-title">Group Table (9+)</div>
-                <div class="card-desc">9 or more guests · Shared dining area · No minimum spend</div>
+                <div class="card-tag">Dining</div>
+                <div class="card-title">Table Reservation</div>
+                <div class="card-desc">Any group size · Standard dining area · No minimum spend</div>
               </div>
             </label>
             <label class="booking-type-card">
@@ -557,6 +243,12 @@
 
         <div class="form-section" id="event-details-section">
           <div class="section-label">Event details</div>
+
+          <!-- Private hire note — shown only for basement/exclusive -->
+          <div class="private-hire-note" id="private-hire-note">
+            Private hire bookings require a minimum of 3 hours. Please select both a start time and an end time below.
+          </div>
+
           <div class="field-row">
             <div class="field" id="field-date">
               <label>Preferred date <span class="req">*</span></label>
@@ -564,13 +256,29 @@
               <span class="error-msg">Please select a date</span>
             </div>
             <div class="field" id="field-time">
-              <label>Preferred time <span class="req">*</span></label>
+              <label>Start time <span class="req">*</span></label>
               <select name="time">
                 <option value="" disabled selected>Select a time</option>
               </select>
-              <span class="error-msg">Please select a time</span>
+              <span class="error-msg">Please select a start time</span>
             </div>
           </div>
+
+          <!-- End time row — only visible for private hire -->
+          <div class="field-row" id="end-time-row">
+            <div class="field" id="field-end-time">
+              <label>End time <span class="req">*</span></label>
+              <select name="end_time">
+                <option value="" disabled selected>Select an end time</option>
+              </select>
+              <span class="error-msg">Please select an end time (minimum 3 hours)</span>
+            </div>
+            <div class="field">
+              <label>&nbsp;</label>
+              <div id="duration-indicator"></div>
+            </div>
+          </div>
+
           <div class="field-row">
             <div class="field" id="field-guests">
               <label>Number of guests <span class="req">*</span></label>
@@ -613,7 +321,6 @@
           <button type="submit" class="submit-btn" id="submit-btn">Send enquiry</button>
           <p class="privacy-note">Your details are kept private and only used to respond to your enquiry.</p>
         </div>
-
       </form>
     </div>
 
@@ -632,80 +339,162 @@
   const submitBtn = document.getElementById('submit-btn');
   const dateInput = form.querySelector('input[name="date"]');
   const timeSelect = form.querySelector('select[name="time"]');
+  const endTimeSelect = form.querySelector('select[name="end_time"]');
+  const endTimeRow = document.getElementById('end-time-row');
+  const privateHireNote = document.getElementById('private-hire-note');
+  const durationIndicator = document.getElementById('duration-indicator');
 
-  // Set minimum date to today
   const todayDate = new Date();
   const todayString = todayDate.toISOString().split('T')[0];
   dateInput.min = todayString;
 
-  // Generate 30-minute intervals from 07:00 to 23:00 to match venue trading hours
+  function isPrivateHire() {
+    const selected = form.querySelector('input[name="booking_type"]:checked');
+    return selected && (selected.value === 'basement_hire' || selected.value === 'exclusive_hire');
+  }
+
+  function toMins(t) {
+    const [h, m] = t.split(':').map(Number);
+    return h * 60 + m;
+  }
+
   function populateTimeSlots() {
     const selectedDate = dateInput.value;
     const now = new Date();
-    
-    // Save current selection to restore it if it's still valid
     const currentSelection = timeSelect.value;
-    
+
     timeSelect.innerHTML = '<option value="" disabled selected>Select a time</option>';
 
-    const startHour = 7; 
-    const endHour = 23;
-
-    for (let hour = startHour; hour <= endHour; hour++) {
-      ['00', '30'].forEach(minutes => {
-        if (hour === endHour && minutes === '30') return; // Closes at 23:00
-        
+    for (let hour = 7; hour <= 23; hour++) {
+      for (const minutes of ['00', '30']) {
+        if (hour === 23 && minutes === '30') continue;
         const timeString = `${hour.toString().padStart(2, '0')}:${minutes}`;
-        
-        // If the chosen date is today, omit past times
         if (selectedDate === todayString) {
-          const currentHour = now.getHours();
-          const currentMinute = now.getMinutes();
-          if (hour < currentHour || (hour === currentHour && parseInt(minutes) <= currentMinute)) {
-            return; 
-          }
+          const ch = now.getHours(), cm = now.getMinutes();
+          if (hour < ch || (hour === ch && parseInt(minutes) <= cm)) continue;
         }
-
-        const option = document.createElement('option');
-        option.value = timeString;
-        option.textContent = timeString;
-        timeSelect.appendChild(option);
-      });
+        const opt = document.createElement('option');
+        opt.value = timeString;
+        opt.textContent = timeString;
+        timeSelect.appendChild(opt);
+      }
     }
 
-    // Restore previous selection if it's still an available choice
     if (currentSelection && [...timeSelect.options].some(o => o.value === currentSelection)) {
       timeSelect.value = currentSelection;
     }
+
+    populateEndTimeSlots();
   }
 
-  // Handle dynamic time rebuilding when changing dates
-  dateInput.addEventListener('change', populateTimeSlots);
-  
-  // Initial run on document load
-  document.addEventListener('DOMContentLoaded', populateTimeSlots);
+  function populateEndTimeSlots() {
+    const startVal = timeSelect.value;
+    const currentEnd = endTimeSelect.value;
 
-  const bookingTypeRadios = document.querySelectorAll('input[name="booking_type"]');
-  const eventDetailsSection = document.getElementById('event-details-section');
+    endTimeSelect.innerHTML = '<option value="" disabled selected>Select an end time</option>';
 
-  bookingTypeRadios.forEach(radio => {
+    if (!startVal) return;
+
+    const startMins = toMins(startVal);
+
+    for (let hour = 7; hour <= 23; hour++) {
+      for (const minutes of ['00', '30']) {
+        if (hour === 23 && minutes === '30') continue;
+        const timeString = `${hour.toString().padStart(2, '0')}:${minutes}`;
+        const slotMins = toMins(timeString);
+        // Must be after start time AND at least 3 hours later
+        if (slotMins <= startMins + 30) continue; // show all options after start but validate on submit
+        const opt = document.createElement('option');
+        opt.value = timeString;
+        opt.textContent = timeString;
+        // Mark times under 3hrs as dimmed hint
+        if (slotMins - startMins < 180) {
+          opt.textContent = timeString + ' (under 3 hrs)';
+          opt.style.color = '#aaa';
+        }
+        endTimeSelect.appendChild(opt);
+      }
+    }
+
+    if (currentEnd && [...endTimeSelect.options].some(o => o.value === currentEnd)) {
+      endTimeSelect.value = currentEnd;
+    }
+
+    updateDurationIndicator();
+  }
+
+  function updateDurationIndicator() {
+    const startVal = timeSelect.value;
+    const endVal = endTimeSelect.value;
+
+    if (!startVal || !endVal || !isPrivateHire()) {
+      durationIndicator.className = '';
+      durationIndicator.textContent = '';
+      return;
+    }
+
+    const durationMins = toMins(endVal) - toMins(startVal);
+    const hrs = Math.floor(durationMins / 60);
+    const mins = durationMins % 60;
+    const label = hrs > 0 ? `${hrs}h${mins > 0 ? ` ${mins}m` : ''}` : `${mins}m`;
+
+    if (durationMins >= 180) {
+      durationIndicator.className = 'valid';
+      durationIndicator.textContent = `Duration: ${label} ✓`;
+    } else {
+      durationIndicator.className = 'invalid';
+      durationIndicator.textContent = `Duration: ${label} — minimum 3 hours required`;
+    }
+  }
+
+  function updatePrivateHireUI() {
+    if (isPrivateHire()) {
+      endTimeRow.classList.add('visible');
+      privateHireNote.classList.add('visible');
+      // Update start time label
+      form.querySelector('#field-time label').innerHTML = 'Start time <span class="req">*</span>';
+    } else {
+      endTimeRow.classList.remove('visible');
+      privateHireNote.classList.remove('visible');
+      form.querySelector('#field-time label').innerHTML = 'Preferred time <span class="req">*</span>';
+      durationIndicator.className = '';
+      durationIndicator.textContent = '';
+    }
+  }
+
+  // Booking type change
+  document.querySelectorAll('input[name="booking_type"]').forEach(radio => {
     radio.addEventListener('change', () => {
       document.getElementById('field-booking-type-error').style.display = 'none';
-      if (radio.value === 'general') {
-        eventDetailsSection.style.opacity = '0.5';
-        dateInput.removeAttribute('required');
-        timeSelect.removeAttribute('required');
-        form.querySelector('input[name="guests"]').removeAttribute('required');
+      const selected = form.querySelector('input[name="booking_type"]:checked');
+      if (selected.value === 'general') {
+        document.getElementById('event-details-section').style.opacity = '0.5';
       } else {
-        eventDetailsSection.style.opacity = '1';
+        document.getElementById('event-details-section').style.opacity = '1';
       }
+      updatePrivateHireUI();
+      populateEndTimeSlots();
     });
   });
+
+  dateInput.addEventListener('change', populateTimeSlots);
+  timeSelect.addEventListener('change', () => {
+    populateEndTimeSlots();
+    const f = document.getElementById('field-time');
+    if (f) f.classList.remove('has-error');
+  });
+  endTimeSelect.addEventListener('change', () => {
+    updateDurationIndicator();
+    const f = document.getElementById('field-end-time');
+    if (f) f.classList.remove('has-error');
+  });
+
+  document.addEventListener('DOMContentLoaded', populateTimeSlots);
 
   function validateField(fieldId, input) {
     const field = document.getElementById(fieldId);
     if (!field) return true;
-    if (!input.value.trim()) {
+    if (!input.value || !input.value.trim()) {
       field.classList.add('has-error');
       return false;
     }
@@ -717,7 +506,6 @@
     return true;
   }
 
-  // Added dynamic 'change' event to time custom select element for responsive inline validations
   ['name', 'phone', 'email', 'date', 'time', 'guests'].forEach(name => {
     const input = form.querySelector(`[name="${name}"]`);
     if (input) {
@@ -727,18 +515,11 @@
         const field = document.getElementById(`field-${name}`);
         if (field) field.classList.remove('has-error');
       });
-      if (input.tagName === 'SELECT') {
-        input.addEventListener('change', () => {
-          const field = document.getElementById(`field-${name}`);
-          if (field) field.classList.remove('has-error');
-        });
-      }
     }
   });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     let valid = true;
 
     valid = validateField('field-name', form.querySelector('[name="name"]')) && valid;
@@ -755,6 +536,25 @@
       valid = validateField('field-date', dateInput) && valid;
       valid = validateField('field-time', timeSelect) && valid;
       valid = validateField('field-guests', form.querySelector('[name="guests"]')) && valid;
+
+      // Validate end time for private hire
+      if (isPrivateHire()) {
+        const endVal = endTimeSelect.value;
+        const startVal = timeSelect.value;
+        const endField = document.getElementById('field-end-time');
+
+        if (!endVal) {
+          endField.classList.add('has-error');
+          endField.querySelector('.error-msg').textContent = 'Please select an end time';
+          valid = false;
+        } else if (startVal && toMins(endVal) - toMins(startVal) < 180) {
+          endField.classList.add('has-error');
+          endField.querySelector('.error-msg').textContent = 'Minimum duration is 3 hours for private hire';
+          valid = false;
+        } else {
+          endField.classList.remove('has-error');
+        }
+      }
     }
 
     if (!valid) return;
@@ -766,6 +566,7 @@
       booking_type: selectedType.value,
       date: dateInput.value,
       time: timeSelect.value,
+      end_time: isPrivateHire() ? endTimeSelect.value : '',
       guests: form.querySelector('[name="guests"]').value,
       occasion: form.querySelector('[name="occasion"]').value,
       dietary: form.querySelector('[name="dietary"]').value.trim(),
@@ -777,9 +578,7 @@
     submitBtn.textContent = 'Sending...';
 
     try {
-      const WEBHOOK_URL = 'https://sabith.app.n8n.cloud/webhook/lantana-enquiry';
-
-      await fetch(WEBHOOK_URL, {
+      await fetch('https://sabith.app.n8n.cloud/webhook/lantana-enquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
