@@ -27,17 +27,18 @@
 }
 /* Force light mode — prevents Chrome/Safari mobile smart-inversion */
 html{
-  background:#F7F3EC !important;
+  background:#FFFFFF !important;
   color:#16140F !important;
   color-scheme:light only;
   -webkit-text-size-adjust:100%;
 }
-html,body{background:#F7F3EC;color:#16140F;font-family:'Jost',sans-serif;min-height:100vh}
-/* Override any system dark mode */
+html,body{background:#FFFFFF;color:#16140F;font-family:'Jost',sans-serif;min-height:100vh}
+
+/* Override any system dark mode aggressively */
 @media(prefers-color-scheme:dark){
   html,body,.menu-card,.verify-card,.cart-drawer,.sidebar,
   .verify-screen,.hero,.page-body,.menu-area{
-    background:#F7F3EC !important;
+    background:#FFFFFF !important;
     color:#16140F !important;
   }
   .menu-card,.verify-card{
@@ -120,7 +121,7 @@ html,body{background:#F7F3EC;color:#16140F;font-family:'Jost',sans-serif;min-hei
   align-items:center;
   justify-content:center;
   padding:3rem 1.5rem;
-  background:linear-gradient(160deg,#F7F3EC 0%,#EDE8DF 100%);
+  background:#FFFFFF !important; /* Solid background prevents iOS gradient dimming */
 }
 .verify-card{
   background:#FFFFFF;
@@ -254,7 +255,7 @@ html,body{background:#F7F3EC;color:#16140F;font-family:'Jost',sans-serif;min-hei
 
 /* ── LAYOUT ── */
 .page-body{display:grid;grid-template-columns:1fr 340px;min-height:calc(100vh - 180px)}
-.menu-area{padding:2.5rem 2rem;border-right:1px solid #DDD5C5}
+.menu-area{padding:2.5rem 2rem;border-right:1px solid #DDD5C5;background:#FFFFFF}
 .sidebar{padding:2rem;position:sticky;top:60px;height:fit-content;max-height:calc(100vh - 60px);overflow-y:auto;background:#FDFAF5}
 
 /* ── CATEGORY NAV ── */
@@ -508,7 +509,6 @@ html,body{background:#F7F3EC;color:#16140F;font-family:'Jost',sans-serif;min-hei
   </button>
 </header>
 
-<!-- VERIFY -->
 <div class="verify-screen" id="verifyScreen">
   <div class="verify-card">
     <div class="lock-ring">
@@ -533,7 +533,6 @@ html,body{background:#F7F3EC;color:#16140F;font-family:'Jost',sans-serif;min-hei
   </div>
 </div>
 
-<!-- MAIN APP -->
 <div id="mainApp" style="display:none">
   <div class="booking-banner" id="bookingBanner">
     <div class="bdetail">Guest<span id="bannerName">—</span></div>
@@ -568,7 +567,6 @@ html,body{background:#F7F3EC;color:#16140F;font-family:'Jost',sans-serif;min-hei
   </div>
 </div>
 
-<!-- MOBILE DRAWER -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleDrawer()"></div>
 <div class="cart-drawer" id="cartDrawer">
   <button class="drawer-close" onclick="toggleDrawer()">×</button>
@@ -814,7 +812,7 @@ function renderCart(){
   });
 }
 function openCI(pfx,id){const q=document.getElementById(pfx+'cq-'+id);const i=document.getElementById(pfx+'ci-'+id);if(!q||!i)return;q.style.display='none';i.style.display='inline-block';i.focus();i.select()}
-function closeCI(pfx,id){const q=document.getElementById(pfx+'cq-'+id);const i=document.getElementById(pfx+'ci-'+id);if(!q||!i)return;i.style.display='none';q.style.display=''}
+function closeCI(pfx,id){const q=document.getElementById(pfx+'cq-'+id);const i=document.getElementById(pfx+'ci-'+id);if(!q||!i)return;q.style.display='none';q.style.display=''}
 function commitCI(pfx,id){const i=document.getElementById(pfx+'ci-'+id);if(!i)return;setQty(id,parseInt(i.value)||0)}
 
 async function submitOrder(pfx){
