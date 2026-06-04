@@ -253,79 +253,80 @@ html,body{background:#F7F3EC;color:#16140F;font-family:'Jost',sans-serif;min-hei
   color:#16140F;
 }
 .section-emoji{font-size:1.1rem;opacity:.6}
-.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.menu-grid{display:flex;flex-direction:column;gap:0}
 
-/* ── MENU CARD ── */
+/* ── MENU CARD — horizontal list style ── */
 .menu-card{
   background:#FFFFFF;
-  border:1px solid #DDD5C5;
-  border-radius:3px;
-  overflow:hidden;
+  border-bottom:1px solid #EDE8DF;
   display:flex;
-  flex-direction:column;
-  transition:border-color .2s,box-shadow .2s;
+  align-items:center;
+  gap:1rem;
+  padding:.9rem 0;
+  transition:background .15s;
   position:relative;
   cursor:default;
 }
-.menu-card:hover{border-color:#C9BEA8;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.menu-card.in-cart{border-color:#B8935A}
-.card-img{
-  width:100%;
-  aspect-ratio:4/3;
-  max-height:160px;
+.menu-card:first-child{border-top:1px solid #EDE8DF}
+.menu-card:hover{background:#FDFAF5}
+.menu-card.in-cart{background:#FBF6EE}
+.card-thumb{
+  width:68px;
+  height:68px;
+  border-radius:2px;
   overflow:hidden;
+  flex-shrink:0;
   background:#EDE8DF;
-  border-bottom:1px solid #DDD5C5;
   position:relative;
 }
-.card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
-.menu-card:hover .card-img img{transform:scale(1.04)}
+.card-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
+.menu-card:hover .card-thumb img{transform:scale(1.06)}
 .card-emoji{
-  width:100%;
-  aspect-ratio:4/3;
-  max-height:160px;
+  width:68px;
+  height:68px;
+  border-radius:2px;
+  flex-shrink:0;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:2.2rem;
+  font-size:1.5rem;
   background:linear-gradient(135deg,#EDE8DF,#E0D8CA);
-  border-bottom:1px solid #DDD5C5;
 }
 .qty-badge{
   position:absolute;
-  top:8px;
-  right:8px;
+  top:-5px;
+  right:-5px;
   background:#B8935A;
   color:#FFFFFF;
-  font-weight:600;
-  font-size:10px;
-  min-width:22px;
-  height:22px;
-  border-radius:11px;
+  font-weight:700;
+  font-size:9px;
+  min-width:18px;
+  height:18px;
+  border-radius:9px;
   display:none;
   align-items:center;
   justify-content:center;
-  padding:0 5px;
+  padding:0 4px;
   z-index:2;
+  border:2px solid #FFFFFF;
 }
 .menu-card.in-cart .qty-badge{display:flex}
-.card-body{padding:.9rem;display:flex;flex-direction:column;gap:5px;flex:1}
-.item-name{font-size:13px;font-weight:500;color:#16140F;line-height:1.35}
-.item-desc{font-size:11.5px;color:#7A746C;line-height:1.5;flex:1}
-.item-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:2px}
-.tag{font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:1px;font-weight:500}
+.card-body{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}
+.item-name{font-size:13px;font-weight:500;color:#16140F;line-height:1.3}
+.item-desc{font-size:11.5px;color:#A09990;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item-tags{display:flex;gap:3px;flex-wrap:wrap;margin-top:1px}
+.tag{font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:1px 6px;border-radius:1px;font-weight:500}
 .tag-vg{background:#E8F2EC;color:#2D6348}
 .tag-v{background:#FFF7E6;color:#8B6914}
-.item-note{font-size:10px;color:#B8935A;font-style:italic;margin-top:2px}
+.item-note{font-size:10px;color:#B8935A;font-style:italic}
 .card-footer{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-top:8px;
-  padding-top:8px;
-  border-top:1px solid #EDE8DF;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:6px;
+  flex-shrink:0;
 }
-.item-price{font-size:13px;font-weight:500;color:#16140F;font-family:'Cormorant Garamond',serif}
+.item-price{font-size:14px;font-weight:400;color:#16140F;font-family:'Cormorant Garamond',serif;white-space:nowrap}
 
 /* ── QTY CONTROLS ── */
 .qty-ctrl{display:flex;align-items:center;gap:5px}
@@ -441,10 +442,10 @@ html,body{background:#F7F3EC;color:#16140F;font-family:'Jost',sans-serif;min-hei
   .sidebar{display:none}
   .cart-overlay{display:block}
   .menu-area{padding:1.5rem 1rem;border-right:none}
-  .menu-grid{grid-template-columns:1fr}
   .booking-banner{gap:0;padding:.75rem 1rem}
   .bdetail{padding:.25rem 1rem .25rem 0;margin-right:1rem;font-size:10px}
   .hero{padding:2.5rem 1rem 2rem}
+  .item-desc{white-space:normal}
 }
 @media(max-width:480px){
   .verify-card{padding:2rem 1.25rem}
@@ -696,20 +697,20 @@ function buildMenu(){
       const tagsHtml=(item.tags||[]).map(t=>`<span class="tag tag-${t}">${TAGS[t]}</span>`).join('');
       const priceStr=item.price?`£${item.price.toFixed(2)}`:'Ask staff';
       const imgSrc=IMAGES[item.id];
-      const imgHtml=imgSrc
-        ?`<div class="card-img"><img src="${imgSrc}" alt="${item.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=card-emoji>${cat.emoji}</div>'"><div class="qty-badge" id="badge-${item.id}">0</div></div>`
-        :`<div class="card-emoji">${cat.emoji}</div><div class="qty-badge" id="badge-${item.id}" style="top:8px;right:8px;position:absolute">0</div>`;
-      card.innerHTML=`${imgHtml}
+      const thumbHtml=imgSrc
+        ?`<div class="card-thumb"><img src="${imgSrc}" alt="${item.name}" loading="lazy" onerror="this.parentElement.outerHTML='<div class=card-emoji>${cat.emoji}</div>'"><div class="qty-badge" id="badge-${item.id}">0</div></div>`
+        :`<div class="card-emoji" style="position:relative"><div class="qty-badge" id="badge-${item.id}">0</div>${cat.emoji}</div>`;
+      card.innerHTML=`${thumbHtml}
         <div class="card-body">
           <div class="item-name">${item.name}</div>
           ${item.desc?`<div class="item-desc">${item.desc}</div>`:''}
           ${tagsHtml?`<div class="item-tags">${tagsHtml}</div>`:''}
           ${item.note?`<div class="item-note">${item.note}</div>`:''}
-          <div class="card-footer">
-            <div class="item-price">${priceStr}</div>
-            <div class="qty-ctrl" id="ctrl-${item.id}">
-              <button class="btn-add" onclick="addItem('${item.id}')" title="Add">+</button>
-            </div>
+        </div>
+        <div class="card-footer">
+          <div class="item-price">${priceStr}</div>
+          <div class="qty-ctrl" id="ctrl-${item.id}">
+            <button class="btn-add" onclick="addItem('${item.id}')" title="Add">+</button>
           </div>
         </div>`;
       grid.appendChild(card);
