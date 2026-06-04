@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light only">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
 <title>Lantana London Bridge — Pre-Order</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -24,7 +25,43 @@
   --red:#9B3C31;
   --green:#2D6348;
 }
+/* Force light mode — prevents Chrome/Safari mobile smart-inversion */
+html{
+  background:#F7F3EC !important;
+  color:#16140F !important;
+  color-scheme:light only;
+  -webkit-text-size-adjust:100%;
+}
 html,body{background:#F7F3EC;color:#16140F;font-family:'Jost',sans-serif;min-height:100vh}
+/* Override any system dark mode */
+@media(prefers-color-scheme:dark){
+  html,body,.menu-card,.verify-card,.cart-drawer,.sidebar,
+  .verify-screen,.hero,.page-body,.menu-area{
+    background:#F7F3EC !important;
+    color:#16140F !important;
+  }
+  .menu-card,.verify-card{
+    background:#FFFFFF !important;
+    border-color:#DDD5C5 !important;
+    color:#16140F !important;
+  }
+  input,textarea,select{
+    background:#F7F3EC !important;
+    color:#16140F !important;
+    border-color:#DDD5C5 !important;
+  }
+  .item-name{color:#16140F !important}
+  .item-desc{color:#A09990 !important}
+  .item-price{color:#16140F !important}
+  .card-body{color:#16140F !important}
+  .cat-btn{background:#FFFFFF !important;color:#7A746C !important;border-color:#DDD5C5 !important}
+  .cat-btn.active{background:#16140F !important;color:#F7F3EC !important}
+  .submit-btn{background:#16140F !important;color:#F7F3EC !important}
+  .cart-note-area{background:#F7F3EC !important;color:#16140F !important}
+  .sidebar,.cart-drawer{background:#FDFAF5 !important;color:#16140F !important}
+  .ci-name,.ci-price,.ci-qty,.cart-row{color:#16140F !important}
+  .sidebar-label{color:#A09990 !important}
+}
 
 /* ── HEADER ── */
 .site-header{
@@ -254,6 +291,12 @@ html,body{background:#F7F3EC;color:#16140F;font-family:'Jost',sans-serif;min-hei
 }
 .section-emoji{font-size:1.1rem;opacity:.6}
 .menu-grid{display:flex;flex-direction:column;gap:0}
+/* Desktop: 2-col split within each section */
+@media(min-width:900px){
+  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 2rem}
+  .menu-card{border-bottom:1px solid #EDE8DF;border-right:none}
+  .menu-card:nth-child(odd){border-right:1px solid #EDE8DF}
+}
 
 /* ── MENU CARD — horizontal list style ── */
 .menu-card{
