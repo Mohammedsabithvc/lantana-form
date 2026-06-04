@@ -25,16 +25,16 @@
     --green:#2D6348;
   }
 
-  /* Core rendering baseline mirrored from the functional Enquiry Form structure */
+  /* Fixed global layout parameters matching the Enquiry Form baseline */
   html,body {
-    background:#FFFFFF;
-    color:#16140F;
+    background:#FFFFFF !important;
+    color:#16140F !important;
     font-family:'Jost',sans-serif;
     min-height:100vh;
     -webkit-text-size-adjust:100%;
   }
 
-  /* Native dark mode containment strategy blocks iOS smart inversion loops */
+  /* Strict system-level overrides blocking WebKit dynamic layer adjustments */
   @media(prefers-color-scheme:dark){
     html,body,.menu-card,.verify-card,.cart-drawer,.sidebar,.verify-screen,.hero,.page-body,.menu-area {
       background:#FFFFFF !important;
@@ -466,14 +466,35 @@
     color:#B8935A;
   }
 
-  /* ── MOBILE CART ── */
-  .cart-overlay{display:none;position:fixed;inset:0;background:rgba(22,20,15,0.6);z-index:200;pointer-events:none}
-  .cart-overlay.active{pointer-events:all}
+  /* ── MOBILE CART OVERLAY FIXED ── */
+  .cart-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:transparent; /* Force transparent baseline to prevent inversion trace bleeding */
+    z-index:200;
+    pointer-events:none;
+    transition:background 0.25s ease;
+  }
+  /* Apply dark transparency color profile dynamically only when requested */
+  .cart-overlay.active{
+    display:block;
+    pointer-events:all;
+    background:rgba(22,20,15,0.6) !important;
+  }
   .cart-drawer{
-    position:fixed;right:0;top:0;bottom:0;width:min(360px,95vw);
-    background:#FDFAF5;padding:1.5rem;overflow-y:auto;
-    transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
-    z-index:201;border-left:1px solid #DDD5C5;
+    position:fixed;
+    right:0;
+    top:0;
+    bottom:0;
+    width:min(360px,95vw);
+    background:#FDFAF5;
+    padding:1.5rem;
+    overflow-y:auto;
+    transform:translateX(100%);
+    transition:transform .3s cubic-bezier(.4,0,.2,1);
+    z-index:201;
+    border-left:1px solid #DDD5C5;
   }
   .cart-drawer.open{transform:translateX(0)}
   .drawer-close{background:none;border:none;font-size:20px;cursor:pointer;float:right;color:#7A746C;line-height:1;padding:4px}
@@ -483,7 +504,6 @@
   @media(max-width:900px){
     .page-body{grid-template-columns:1fr}
     .sidebar{display:none}
-    .cart-overlay{display:block}
     .menu-area{padding:1.5rem 1rem;border-right:none}
     .booking-banner{gap:0;padding:.75rem 1rem}
     .bdetail{padding:.25rem 1rem .25rem 0;margin-right:1rem;font-size:10px}
@@ -513,7 +533,7 @@
     <div class="lock-ring">
       <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
     </div>
-    <h2>Access your<br><em>pre-order1</em></h2>
+    <h2>Access your<br><em>pre-order</em></h2>
     <p>Enter your confirmation code and the booking holder's last name to unlock the menu.</p>
     <div class="divider"></div>
     <div class="vfield">
@@ -767,7 +787,6 @@ function setQty(id,qty){
   if(qty===0)delete cart[id];else cart[id]=qty;
   updateCard(id);renderCart();
 }
-// Automation utility wrappers
 function addItem(id){setQty(id,(cart[id]||0)+1)}
 function removeItem(id){setQty(id,(cart[id]||1)-1)}
 function clearItem(id){setQty(id,0)}
