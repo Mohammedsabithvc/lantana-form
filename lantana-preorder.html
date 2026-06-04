@@ -153,7 +153,7 @@
   .verify-card h2 em{font-style:italic;color:var(--gold)}
   .verify-card>p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:2.5rem}
   .divider{height:1px;background:var(--border);margin:0 0 2.5rem}
-  .vfield{text-align:left;margin-bottom:1.5rem}
+  .vfield{text-align:left;margin-bottom:1.25rem}
   .vfield label{font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--muted2);display:block;margin-bottom:.6rem}
   .vfield input{
     width:100%;
@@ -254,7 +254,7 @@
   .menu-area{padding:3.5rem 3rem;border-right:1px solid var(--border);background:#FFFFFF}
   .sidebar{padding:3.5rem 2.5rem;position:sticky;top:70px;height:fit-content;max-height:calc(100vh - 70px);overflow-y:auto;background:#FDFAF5}
 
-  /* ── PREMIUM CATEGORY NAV ── */
+  /* ── CATEGORY NAV ── */
   .cat-nav{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:4rem;border-bottom:1px solid var(--cream2);padding-bottom:1rem}
   .cat-btn{
     padding:4px 0;
@@ -308,7 +308,7 @@
     .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem 3rem}
   }
 
-  /* ── MENU CARD OVERHAUL ── */
+  /* ── MENU CARD ── */
   .menu-card{
     background:#FFFFFF;
     border-bottom:1px solid var(--cream2);
@@ -366,7 +366,7 @@
   .item-desc{font-size:13px;color:var(--muted);line-height:1.5;font-weight:300}
   .item-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:2px}
   .tag{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:0px}
-  .tag-vg{background:#E8F2EC;color:var(--green)}
+  .tag-vg{background:#E8F2EC;colorvar(--green)}
   .tag-v{background:#FFF7E6;color:#8B6914}
   .item-note{font-size:11px;color:var(--gold);font-style:italic;margin-top:2px}
   
@@ -380,7 +380,7 @@
   }
   .item-price{font-size:16px;font-weight:400;color:var(--dark);font-family:'Cormorant Garamond',serif;letter-spacing:0.02em}
 
-  /* ── TIMLESS ACTION CONTROLS ── */
+  /* ── ACTION CONTROLS ── */
   .qty-ctrl{display:flex;align-items:center;gap:8px}
   .qty-ctrl button{
     width:28px;height:28px;
@@ -400,7 +400,7 @@
     background:#FFFFFF;color:var(--dark);
   }
 
-  /* ── SIDEBAR RECEIPTS PANEL ── */
+  /* ── SIDEBAR CART & FIXES FOR DOUBLE NUMBERS ── */
   .sidebar-label{
     font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
     color:var(--dark);margin-bottom:2rem;padding-bottom:1rem;
@@ -408,23 +408,46 @@
   }
   .cart-empty{text-align:center;padding:4rem 0;color:var(--muted2);font-size:14px}
   .cart-items{display:flex;flex-direction:column;gap:.5rem;margin-bottom:2rem}
+  
   .ci{
     display:flex;align-items:center;gap:12px;
     padding:1rem 0;border-bottom:1px solid var(--border);
   }
   .ci:last-child{border-bottom:none}
-  .ci-name{font-size:13px;font-weight:400;flex:1;line-height:1.4;color:var(--dark)}
-  .ci-controls{display:flex;align-items:center;gap:6px;flex-shrink:0}
+  .ci-name{font-size:13px;font-weight:400;flex:1;line-height:1.4;color:var(--dark);padding-right:4px}
+  
+  /* Unified layout sandbox container for cart controls */
+  .ci-controls{display:flex;align-items:center;gap:6px;flex-shrink:0;position:relative}
   .ci-btn{
-    width:22px;height:22px;
+    width:24px;height:24px;
     border:1px solid var(--border);background:#FFFFFF;
     font-size:12px;cursor:pointer;
     display:flex;align-items:center;justify-content:center;
     transition:all .15s;color:var(--dark);
   }
-  .ci-btn:hover{border-color:var(--dark)}
-  .ci-qty{font-size:12px;font-weight:500;min-width:18px;text-align:center;color:var(--dark)}
-  .ci-price{font-size:14px;color:var(--dark);min-width:45px;text-align:right;font-family:'Cormorant Garamond',serif;font-weight:500}
+  .ci-btn:hover{border-color:var(--dark);background:var(--cream)}
+  
+  /* Explicit toggle rule matches input inline box boundaries */
+  .ci-qty{
+    font-size:13px;font-weight:500;min-width:20px;text-align:center;
+    color:var(--dark);cursor:pointer;display:inline-block;
+  }
+  
+  /* Clean high-end layout rules for internal numeric selectors */
+  .ci-qty-in{
+    font-size:13px;font-weight:500;width:34px;text-align:center;
+    border:1px solid var(--gold);border-radius:0px;padding:2px 0;
+    font-family:'Jost',sans-serif;outline:none;display:none;
+    background:#FFFFFF;color:var(--dark);
+    appearance:none; -webkit-appearance:none; -moz-appearance:textfield;
+  }
+  /* Remove ugly standard browser increment arrows */
+  .ci-qty-in::-webkit-outer-spin-button,
+  .ci-qty-in::-webkit-inner-spin-button {
+    -webkit-appearance:none;margin:0;
+  }
+
+  .ci-price{font-size:14px;color:var(--dark);min-width:52px;text-align:right;font-family:'Cormorant Garamond',serif;font-weight:500}
   .ci-del{background:none;border:none;color:var(--border2);cursor:pointer;font-size:16px;padding:0 4px;transition:color .15s}
   .ci-del:hover{color:var(--red)}
   
@@ -443,7 +466,7 @@
     resize:none;height:85px;background:#FFFFFF;color:var(--dark);
     outline:none;margin-bottom:1.5rem;transition:border-color .2s;
   }
-  .cart-note-area:focus{border-color:var(--dark)}
+  .cart-note-area:focus{border-color(--dark)}
   .submit-btn{
     width:100%;padding:16px;background:var(--dark);color:#FFFFFF;
     border:none;border-radius:0px;font-family:'Jost',sans-serif;
@@ -505,6 +528,7 @@
   </button>
 </header>
 
+<!-- VERIFY VIEW -->
 <div class="verify-screen" id="verifyScreen">
   <div class="verify-card">
     <div class="lock-ring">
@@ -529,6 +553,7 @@
   </div>
 </div>
 
+<!-- CONTAINER VIEW -->
 <div id="mainApp" style="display:none">
   <div class="booking-banner" id="bookingBanner">
     <div class="bdetail">Guest<span id="bannerName">—</span></div>
@@ -567,6 +592,7 @@
   </div>
 </div>
 
+<!-- SIDEBAR OVERLAYS -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleDrawer()"></div>
 <div class="cart-drawer" id="cartDrawer">
   <button class="drawer-close" onclick="toggleDrawer()">×</button>
@@ -639,7 +665,7 @@ const MENU=[
   ]},
   {category:'Mains',emoji:'🍽️',items:[
     {id:'m1',name:'Chicken Parmi',price:25,desc:'Buttermilk schnitzel, Napoletana, mozzarella, fries',note:'Add fried egg £2'},
-    {id:'m2',name:'Smash Cheeseburger',price:25,desc:'Double smash patty, pickles, kewpie mayo, fries',note:'Add poached egg £Poached egg £2'},
+    {id:'m2',name:'Smash Cheeseburger',price:25,desc:'Double smash patty, pickles, kewpie mayo, fries',note:'Add poached egg £2'},
     {id:'m3',name:'Roast Cod',price:25,desc:'Celeriac, apple, fennel, horseradish crème fraîche'},
     {id:'m4',name:'Nasi Goreng',price:null,desc:'Coconut pork belly or pulled chicken, fried rice, chilli sambal',note:'Add kimchi £2'},
     {id:'m5',name:'Chicken Shawarma Bowl',price:20.7,desc:'Pulled chicken, broccoli, pickled fennel, toasted almonds'},
@@ -659,7 +685,7 @@ const MENU=[
   {category:'Desserts',emoji:'🍮',items:[
     {id:'d1',name:'Rhubarb Mess',price:9,desc:'Roasted rhubarb, honeyed meringue & cream'},
     {id:'d2',name:'Warm Chocolate Brownie',price:9,desc:'Peanut butter ice cream & crumble'},
-    {id:'d3',name:'Affogato',price:7.5,desc:'Double espresso, ice cream & amaretti'},
+    {id:'d3',name(--id:'d3',name:'Affogato',price:7.5,desc:'Double espresso, ice cream & amaretti'},
     {id:'d4',name:'Banoffee Banana Bread',price:9,desc:'Salted caramel & grilled banana'},
   ]},
 ];
@@ -812,7 +838,7 @@ function renderCart(){
   });
 }
 function openCI(pfx,id){const q=document.getElementById(pfx+'cq-'+id);const i=document.getElementById(pfx+'ci-'+id);if(!q||!i)return;q.style.display='none';i.style.display='inline-block';i.focus();i.select()}
-function closeCI(pfx,id){const q=document.getElementById(pfx+'cq-'+id);const i=document.getElementById(pfx+'ci-'+id);if(!q||!i)return;q.style.display='none';q.style.display=''}
+function closeCI(pfx,id){const q=document.getElementById(pfx+'cq-'+id);const i=document.getElementById(pfx+'ci-'+id);if(!q||!i)return;i.style.display='none';q.style.display=''}
 function commitCI(pfx,id){const i=document.getElementById(pfx+'ci-'+id);if(!i)return;setQty(id,parseInt(i.value)||0)}
 
 async function submitOrder(pfx){
